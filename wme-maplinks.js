@@ -6,7 +6,7 @@
 // @match           *://*.waze.com/*editor*
 // @exclude         *://*.waze.com/user/editor*
 // @grant 			none
-// @version 		1.0.0
+// @version 		1.1.0
 // ==/UserScript==
 
 (function () {
