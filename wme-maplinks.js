@@ -3,7 +3,8 @@
 // @description 	Adds links to other maps
 // @namespace 		http://tampermonkey.net/
 // @author          Robin Breman | L4 Waze NL | @robbre | https://github.com/RobinBreman/WMEFeedSorter
-// @match        	https://www.waze.com/nl/editor*
+// @match           *://*.waze.com/*editor*
+// @exclude         *://*.waze.com/user/editor*
 // @grant 			none
 // @version 		1.0.0
 // ==/UserScript==
