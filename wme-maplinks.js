@@ -110,7 +110,7 @@
 
         //https://www.wegstatus.nl/dashboardnl/lat=51d69761%7Clon=3d744119
 
-        let url = 'https://www.wegstatus.nl/dashboardnl/lat=' + coordinates.y + '%7Clon=' + coordinates.x;
+        let url = 'https://www.wegstatus.nl/dashboardnl_old/lat=' + coordinates.y + '%7Clon=' + coordinates.x;
         window.open(url, '_blank');
     }
 
