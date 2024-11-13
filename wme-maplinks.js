@@ -3,7 +3,8 @@
 // @description 	Adds links to other maps
 // @namespace 		http://tampermonkey.net/
 // @author          Robin Breman | L4 Waze NL | @robbre | https://github.com/RobinBreman/WMEFeedSorter
-// @match        	https://www.waze.com/nl/editor*
+// @match           *://*.waze.com/*editor*
+// @exclude         *://*.waze.com/user/editor*
 // @grant 			none
 // @version 		1.0.0
 // ==/UserScript==
@@ -110,7 +111,7 @@
 
         //https://www.wegstatus.nl/dashboardnl/lat=51d69761%7Clon=3d744119
 
-        let url = 'https://www.wegstatus.nl/dashboardnl_old/lat=' + coordinates.y + '%7Clon=' + coordinates.x;
+        let url = 'https://www.wegstatus.nl/dashboardnl/lat=' + coordinates.y + '%7Clon=' + coordinates.x;
         window.open(url, '_blank');
     }
 
