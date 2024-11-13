@@ -6,7 +6,7 @@
 // @match           *://*.waze.com/*editor*
 // @exclude         *://*.waze.com/user/editor*
 // @grant 			none
-// @version 		1.1.1
+// @version 		1.2.0
 // ==/UserScript==
 
 (function () {
@@ -26,20 +26,40 @@
     }
 
     function addMapLinks() {
-        console.log('Adding maplinks');
+//        console.log('Adding maplinks');
 
         var buttonHTML = $(`
+
+            <style>
+                #WMEMapLinksButtons img { height: 50%}
+            </style>
             <div id='MapLinksDiv'>
                 
                 <div id='WMEMapLinksButtons'>
-                    <button id='WMEMapLinksButton4'>BAG</button>
-                    <button id='WMEMapLinksButton7'>George</button>
-                    <button id='WMEMapLinksButton5'>Mapillary</button>
-                    <button id='WMEMapLinksButton1'>Melvin</button>
-                    <button id='WMEMapLinksButtonX'>NDW</button>
-                    <button id='WMEMapLinksButton3'>Omgevingswet</button>
-                    <button id='WMEMapLinksButton2'>SDP</button>
-                    <button id='WMEMapLinksButton6'>Wegstatus</button>
+                    <button id='WMEMapLinksButton4' title='BAG'>
+                        <img src='https://www.kadaster.nl/favicon.ico'>
+                    </button>
+                    <button id='WMEMapLinksButton7' title='George'>
+                       <img src='https://wegkenmerken.staging.ndw.nu/favicon.ico'>
+                    </button>
+                    <button id='WMEMapLinksButton5' title='Mapillary'>
+                       <img src='https://static.xx.fbcdn.net/rsrc.php/v3/yh/r/tMT3WIParw8.png'>
+                    </button>
+                    <button id='WMEMapLinksButton1' title='Melvin'>
+                        <img src='https://melvin.ndw.nu/assets/icon/favicon-32.png'>
+                    </button>
+                    <button id='WMEMapLinksButtonX' title='NDW'>
+                        <img src='https://www.arcgis.com/favicon.ico'>
+                    </button>
+                    <button id='WMEMapLinksButton3' title='Omgevingswet'>
+                        <img src='https://omgevingswet.overheid.nl/favicon.ico'>
+                    </button>
+                    <button id='WMEMapLinksButton2' title='Satellietdataportaal'>
+                        <img src="https://www.satellietdataportaal.nl/favicon.ico">
+                    </button>
+                    <button id='WMEMapLinksButton6' title='Wegstatus'>
+                        <img src="https://www.wegstatus.nl/favicon.ico">
+                    </button>
                 </div>
             </div>`
         );
