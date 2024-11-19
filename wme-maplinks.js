@@ -1,17 +1,17 @@
 // ==UserScript==
-// @name 			WME-MapLinks - BETA
+// @name 			WME-MapLinks
 // @description 	Adds links to other maps
 // @namespace 		http://tampermonkey.net/
-// @author          Robin Breman | L4 Waze NL | @robbre | https://github.com/RobinBreman/WMEFeedSorter
+// @author          Robin Breman | L4 Waze NL | @robbre | https://github.com/RobinBreman/WME-MapLinks
 // @match           *://*.waze.com/*editor*
 // @exclude         *://*.waze.com/user/editor*
 // @grant 			none
-// @version 		1.2.0
+// @version 		1.2.1
 // ==/UserScript==
 
 (function () {
     'use strict';
-    var version = '0.1.4';
+    var version = '1.2.1';
 
     function wmescript_bootstrap() {
         var wazeapi = W || window.W;
