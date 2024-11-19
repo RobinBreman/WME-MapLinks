@@ -26,7 +26,6 @@
     }
 
     function addMapLinks() {
-//        console.log('Adding maplinks');
 
         var buttonHTML = $(`
 
@@ -36,28 +35,28 @@
             <div id='MapLinksDiv'>
                 
                 <div id='WMEMapLinksButtons'>
-                    <button id='WMEMapLinksButton4' title='BAG'>
+                    <button id='WMEMapLinksButton_BAG' title='BAG'>
                         <img src='https://www.kadaster.nl/favicon.ico'>
                     </button>
-                    <button id='WMEMapLinksButton7' title='George'>
+                    <button id='WMEMapLinksButton_George' title='George'>
                        <img src='https://wegkenmerken.staging.ndw.nu/favicon.ico'>
                     </button>
-                    <button id='WMEMapLinksButton5' title='Mapillary'>
+                    <button id='WMEMapLinksButton_Mapillary' title='Mapillary'>
                        <img src='https://static.xx.fbcdn.net/rsrc.php/v3/yh/r/tMT3WIParw8.png'>
                     </button>
-                    <button id='WMEMapLinksButton1' title='Melvin'>
+                    <button id='WMEMapLinksButton_Melvin' title='Melvin'>
                         <img src='https://melvin.ndw.nu/assets/icon/favicon-32.png'>
                     </button>
-                    <button id='WMEMapLinksButtonX' title='NDW'>
+                    <button id='WMEMapLinksButton_NDW' title='NDW'>
                         <img src='https://www.arcgis.com/favicon.ico'>
                     </button>
-                    <button id='WMEMapLinksButton3' title='Omgevingswet'>
+                    <button id='WMEMapLinksButton_Omgevingswet' title='Omgevingswet'>
                         <img src='https://omgevingswet.overheid.nl/favicon.ico'>
                     </button>
-                    <button id='WMEMapLinksButton2' title='Satellietdataportaal'>
+                    <button id='WMEMapLinksButton_Satellietdataportaal' title='Satellietdataportaal'>
                         <img src="https://www.satellietdataportaal.nl/favicon.ico">
                     </button>
-                    <button id='WMEMapLinksButton6' title='Wegstatus'>
+                    <button id='WMEMapLinksButton_Wegstatus' title='Wegstatus'>
                         <img src="https://www.wegstatus.nl/favicon.ico">
                     </button>
                 </div>
@@ -66,14 +65,14 @@
 
         $('.secondary-toolbar').prepend(buttonHTML);
 
-        $('#WMEMapLinksButton1').click(gotoMelvin);
-        $('#WMEMapLinksButton2').click(gotoSDP);
-        $('#WMEMapLinksButton3').click(gotoOmgevingswet);
-        $('#WMEMapLinksButton4').click(gotoBAGViewer);
-        $('#WMEMapLinksButton5').click(gotoMapillary);
-        $('#WMEMapLinksButton6').click(gotoWegstatus);
-        $('#WMEMapLinksButton7').click(gotoGeorge);
-        $('#WMEMapLinksButtonX').click(x);
+        $('#WMEMapLinksButton_Melvin').click(gotoMelvin);
+        $('#WMEMapLinksButton_Satellietdataportaal').click(gotoSDP);
+        $('#WMEMapLinksButton_Omgevingswet').click(gotoOmgevingswet);
+        $('#WMEMapLinksButton_BAG').click(gotoBAGViewer);
+        $('#WMEMapLinksButton_Mapillary').click(gotoMapillary);
+        $('#WMEMapLinksButton_Wegstatus').click(gotoWegstatus);
+        $('#WMEMapLinksButton_George').click(gotoGeorge);
+        $('#WMEMapLinksButton_NDW').click(gotoNDW);
 
     }
 
@@ -141,7 +140,7 @@
         window.open(url, '_blank');
     }
 
-    function x() {
+    function gotoNDW() {
         // https://www.arcgis.com/apps/instant/interactivelegend/index.html?appid=d9382ea7bf574c4ba2d5a740469c504f&center=
 
         let coordinates = getMapCoordinates();
