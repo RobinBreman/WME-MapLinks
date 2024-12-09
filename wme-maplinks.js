@@ -104,6 +104,8 @@
     }
 
     function gotoBAGViewer() {
+
+        //TODO: proj4js gebruiken om coordinaten naar rd stelsel om te zetten
         let coords = getMapCoordinates();
         let url = 'https://bagviewer.kadaster.nl/lvbag/bag-viewer/?theme=BRT+Achtergrond&geometry.x=' + coords.x + '&geometry.y=' + coords.y + '&zoomlevel=13.776830703977048';
         window.open(url, '_blank');
