@@ -7,12 +7,12 @@
 // @exclude         *://*.waze.com/user/editor*
 // @grant 			none
 // @require      https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.js
-// @version 		1.2.1
+// @version 		1.2.2
 // ==/UserScript==
 
 (function () {
     'use strict';
-    var version = '1.2.1';
+    var version = '1.2.2';
 
     function wmescript_bootstrap() {
         var wazeapi = W || window.W;
