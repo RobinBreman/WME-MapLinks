@@ -20,6 +20,7 @@ https://github.com/RobinBreman/WME-MapLinks
 ## Changelog
 |Version||
 |---|---|
+1.2.2 | Release updated greasyfork version
 1.2.1 | [@J0kerNL] Updated bag link
 1.2.0 | Added button images
 1.1.0 | [@J0kerNL] Updated Wegstatus link, allowed script to run on all languages
