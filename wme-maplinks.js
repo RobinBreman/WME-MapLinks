@@ -6,6 +6,7 @@
 // @match           *://*.waze.com/*editor*
 // @exclude         *://*.waze.com/user/editor*
 // @grant 			none
+// @require      https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.js
 // @version 		1.2.2
 // ==/UserScript==
 
@@ -104,11 +105,17 @@
     }
 
     function gotoBAGViewer() {
-
-        //TODO: proj4js gebruiken om coordinaten naar rd stelsel om te zetten
-        let coords = getMapCoordinates();
-        let url = 'https://bagviewer.kadaster.nl/lvbag/bag-viewer/?theme=BRT+Achtergrond&geometry.x=' + coords.x + '&geometry.y=' + coords.y + '&zoomlevel=13.776830703977048';
-        window.open(url, '_blank');
+    // Define the RD projection
+    proj4.defs("EPSG:28992", "+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 " +
+               "+k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.2369,50.0087," +
+               "465.658,0.406857330322398,0.350732676542563,-1.87034738360657,4.0812 +units=m +no_defs");
+    // Get map coordinates and zoom level
+    let coordinates = getMapCoordinates();
+    // Convert WGS84 to RD coordinates
+    const rdCoords = proj4('EPSG:4326', 'EPSG:28992', [coordinates.x, coordinates.y]);
+    const url = 'https://bagviewer.kadaster.nl/lvbag/bag-viewer/?theme=BRT+Achtergrond&geometry.x=' +
+                rdCoords[0] + '&geometry.y=' + rdCoords[1] + '&zoomlevel=13.776830703977048';
+    window.open(url, '_blank');
     }
 
     function gotoMapillary() {
