@@ -6,12 +6,12 @@
 // @match           *://*.waze.com/*editor*
 // @exclude         *://*.waze.com/user/editor*
 // @grant 			none
-// @version 		1.2.1
+// @version 		1.2.2
 // ==/UserScript==
 
 (function () {
     'use strict';
-    var version = '1.2.1';
+    var version = '1.2.2';
 
     function wmescript_bootstrap() {
         var wazeapi = W || window.W;
