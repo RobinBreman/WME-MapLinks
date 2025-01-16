@@ -12,7 +12,7 @@
 
 (function () {
     'use strict';
-    var version = '1.2.3';
+    var version = '1.3.0';
 
     function wmescript_bootstrap() {
         var wazeapi = W || window.W;
