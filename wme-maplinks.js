@@ -1,18 +1,18 @@
 // ==UserScript==
-// @name 			WME-MapLinks
-// @description 	Adds links to other maps
-// @namespace 		http://tampermonkey.net/
+// @name             WME-MapLinks
+// @description      Adds links to other maps
+// @namespace        http://tampermonkey.net/
 // @author          Robin Breman | L4 Waze NL | @robbre | https://github.com/RobinBreman/WME-MapLinks
 // @match           *://*.waze.com/*editor*
 // @exclude         *://*.waze.com/user/editor*
-// @grant 			none
-// @require      https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.js
-// @version 		1.2.2
+// @grant           none
+// @require         https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.js
+// @version         1.3.0
 // ==/UserScript==
 
 (function () {
     'use strict';
-    var version = '1.2.2';
+    var version = '1.3.0';
 
     function wmescript_bootstrap() {
         var wazeapi = W || window.W;
@@ -20,21 +20,15 @@
             setTimeout(wmescript_bootstrap, 1000);
             return;
         }
-
-        /* begin running the code! */
         addMapLinks();
-
     }
 
     function addMapLinks() {
-
         var buttonHTML = $(`
-
             <style>
                 #WMEMapLinksButtons img { height: 50%}
             </style>
             <div id='MapLinksDiv'>
-                
                 <div id='WMEMapLinksButtons'>
                     <button id='WMEMapLinksButton_BAG' title='BAG'>
                         <img src='https://www.kadaster.nl/favicon.ico'>
@@ -60,6 +54,9 @@
                     <button id='WMEMapLinksButton_Wegstatus' title='Wegstatus'>
                         <img src="https://www.wegstatus.nl/favicon.ico">
                     </button>
+                    <button id='WMEMapLinksButton_GoogleMaps' title='Google Maps'>
+                        <img src='https://www.google.com/favicon.ico'>
+                    </button>
                 </div>
             </div>`
         );
@@ -74,11 +71,10 @@
         $('#WMEMapLinksButton_Wegstatus').click(gotoWegstatus);
         $('#WMEMapLinksButton_George').click(gotoGeorge);
         $('#WMEMapLinksButton_NDW').click(gotoNDW);
-
+        $('#WMEMapLinksButton_GoogleMaps').click(gotoGoogleMaps);
     }
 
     function getMapCoordinates() {
-
         let pl = $('.permalink')[0].href;
         return {
             y: parseFloat(pl.match(/lat=([0-9]+\.[0-9]+)/)[1]),
@@ -90,7 +86,6 @@
         let pl = $('.permalink')[0].href;
         return parseFloat(pl.match(/zoomLevel=([0-9]+)/)[1]);
     }
-
 
     function gotoMelvin() {
         let coordinates = getMapCoordinates();
@@ -105,17 +100,12 @@
     }
 
     function gotoBAGViewer() {
-    // Define the RD projection
-    proj4.defs("EPSG:28992", "+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 " +
-               "+k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.2369,50.0087," +
-               "465.658,0.406857330322398,0.350732676542563,-1.87034738360657,4.0812 +units=m +no_defs");
-    // Get map coordinates and zoom level
-    let coordinates = getMapCoordinates();
-    // Convert WGS84 to RD coordinates
-    const rdCoords = proj4('EPSG:4326', 'EPSG:28992', [coordinates.x, coordinates.y]);
-    const url = 'https://bagviewer.kadaster.nl/lvbag/bag-viewer/?theme=BRT+Achtergrond&geometry.x=' +
-                rdCoords[0] + '&geometry.y=' + rdCoords[1] + '&zoomlevel=13.776830703977048';
-    window.open(url, '_blank');
+        proj4.defs("EPSG:28992", "+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.2369,50.0087,465.658,0.406857330322398,0.350732676542563,-1.87034738360657,4.0812 +units=m +no_defs");
+        let coordinates = getMapCoordinates();
+        const rdCoords = proj4('EPSG:4326', 'EPSG:28992', [coordinates.x, coordinates.y]);
+        const url = 'https://bagviewer.kadaster.nl/lvbag/bag-viewer/?theme=BRT+Achtergrond&geometry.x=' +
+            rdCoords[0] + '&geometry.y=' + rdCoords[1] + '&zoomlevel=13.776830703977048';
+        window.open(url, '_blank');
     }
 
     function gotoMapillary() {
@@ -136,27 +126,28 @@
         let coordinates = getMapCoordinates();
         coordinates.y = coordinates.y.toString().replace('.', 'd');
         coordinates.x = coordinates.x.toString().replace('.', 'd');
-
-        //https://www.wegstatus.nl/dashboardnl/lat=51d69761%7Clon=3d744119
-
         let url = 'https://www.wegstatus.nl/dashboardnl_old/lat=' + coordinates.y + '%7Clon=' + coordinates.x;
         window.open(url, '_blank');
     }
 
     function gotoGeorge() {
         let coordinates = getMapCoordinates();
-        let url = 'https://wegkenmerken.staging.ndw.nu/verkeersborden?identifier=1,'+coordinates.x+','+coordinates.y;
+        let url = 'https://wegkenmerken.staging.ndw.nu/verkeersborden?identifier=1,'+ coordinates.x +','+ coordinates.y;
         window.open(url, '_blank');
     }
 
     function gotoNDW() {
-        // https://www.arcgis.com/apps/instant/interactivelegend/index.html?appid=d9382ea7bf574c4ba2d5a740469c504f&center=
-
         let coordinates = getMapCoordinates();
-        let url = 'https://www.arcgis.com/apps/instant/interactivelegend/index.html?appid=d9382ea7bf574c4ba2d5a740469c504f&center='+coordinates.x+','+coordinates.y;
+        let url = 'https://www.arcgis.com/apps/instant/interactivelegend/index.html?appid=d9382ea7bf574c4ba2d5a740469c504f&center='+ coordinates.x +','+ coordinates.y;
+        window.open(url, '_blank');
+    }
+
+    function gotoGoogleMaps() {
+        let cords = getMapCoordinates();
+        let zoom = getMapZoomlevel();
+        let url = 'https://www.google.com/maps/@' + cords.y + ',' + cords.x + ',' + zoom + 'z';
         window.open(url, '_blank');
     }
 
     setTimeout(wmescript_bootstrap, 5000);
-
 })();
