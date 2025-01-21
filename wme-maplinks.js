@@ -7,13 +7,13 @@
 // @exclude         *://*.waze.com/user/editor*
 // @grant 			none
 // @require         https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.js
-// @version 		1.3.0
+// @version 		1.3.1
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
-    const version = '1.3.0';
+    const version = '1.3.1';
 
     const mapLinksRegistry = [
         {
@@ -27,6 +27,12 @@
             icon: 'https://wegkenmerken.staging.ndw.nu/favicon.ico',
             title: 'George',
             handler: gotoGeorge
+        },
+        {
+            id: 'GoogleMaps',
+            icon: 'https://www.google.com/favicon.ico',
+            title: 'Google Maps',
+            handler: gotoGoogleMaps
         },
         {
             id: 'Mapillary',
@@ -63,12 +69,6 @@
             icon: 'https://www.wegstatus.nl/favicon.ico',
             title: 'Wegstatus',
             handler: gotoWegstatus
-        },
-        {
-            id: 'GoogleMaps',
-            icon: 'https://www.google.com/favicon.ico',
-            title: 'Google Maps',
-            handler: gotoGoogleMaps
         }
     ];
 
