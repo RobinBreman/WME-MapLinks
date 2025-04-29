@@ -29,7 +29,5 @@ https://github.com/RobinBreman/WME-MapLinks
 1.0.0 | First Beta
 0.0.1 | Initial version
 
-
-
 ## About me
-This script is developed by Robin Breman (@robbre), L4 editor Waze NL.
+This script is developed by Robin Breman (@robbre), Waze NL.
