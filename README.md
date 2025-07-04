@@ -13,6 +13,8 @@ This script will add  buttons on top of WME allowing easy access to other source
 - SDP
 - Wegstatus
 
+## Install
+Go to https://greasyfork.org/nl/scripts/504656-wme-maplinks to add this script to tampermonkey
 ## Code
 Feel free to improve this script I will be happy to accept any pull-requests.
 https://github.com/RobinBreman/WME-MapLinks
