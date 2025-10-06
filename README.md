@@ -6,6 +6,7 @@ This script will add  buttons on top of WME allowing easy access to other source
 
 - BAG
 - George
+- Matrixnl
 - Mapillary
 - Melvin
 - NDW
@@ -22,6 +23,7 @@ https://github.com/RobinBreman/WME-MapLinks
 ## Changelog
 |Version||
 |---|---|
+1.3.2 | Added matrixnl.nl
 1.3.1 | Changed button order
 1.3.0 | Added Gmaps link and reworked source [thnx @nivong]
 1.2.2 | Release updated greasyfork version

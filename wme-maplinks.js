@@ -7,7 +7,7 @@
 // @exclude         *://*.waze.com/user/editor*
 // @grant 			none
 // @require         https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.js
-// @version 		1.3.1
+// @version 		1.3.2
 // ==/UserScript==
 
 (function () {
@@ -33,6 +33,12 @@
             icon: 'https://www.google.com/favicon.ico',
             title: 'Google Maps',
             handler: gotoGoogleMaps
+        },
+        {
+            id: 'MatrixNL',
+            icon: 'https://matrixnl.nl/favicon.ico',
+            title: 'MatrixNL',
+            handler: gotoMatrixNL
         },
         {
             id: 'Mapillary',
@@ -181,6 +187,13 @@
         const coords = getMapCoordinates();
         const zoom = getMapZoomlevel();
         const url = `https://www.google.com/maps/@${coords.y},${coords.x},${zoom}z`;
+        window.open(url, '_blank');
+    }
+
+    function gotoMatrixNL() {
+        const coords = getMapCoordinates();
+        const zoom = getMapZoomlevel();
+        const url = `https://matrixnl.nl/index.php?center=${coords.y},${coords.x}&zoom=${zoom}`;
         window.open(url, '_blank');
     }
 
