@@ -21,6 +21,12 @@ Go to https://greasyfork.org/nl/scripts/504656-wme-maplinks to add this script t
 Feel free to improve this script I will be happy to accept any pull-requests.
 https://github.com/RobinBreman/WME-MapLinks
 
+
+```
+npm imstall
+npm run build
+```
+
 ## Changelog
 |Version||
 |---|---|

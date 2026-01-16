@@ -109,12 +109,15 @@ const mapLinksRegistry: MapLink[] = [
     }
 ];
 
-function initScript() {
+function WMEML_InitScript() {
+
+    console.log(`WME-MapLinks v${version} initializing...`);
+    
     // initialize the sdk with your script id and script name
     if (!window.getWmeSdk) {
         throw new Error("SDK not available");
     }
-    W = window.getWmeSdk({ scriptId: "test", scriptName: "test" });
+    W = window.getWmeSdk({ scriptId: "WME-MapLinks", scriptName: "WME-MapLinks" });
 
     // Start using the SDK
     const mapCenter = W.Map.getMapCenter();
@@ -285,5 +288,4 @@ function gotoMatrixNL(): void {
     window.open(url, '_blank');
 }
 
-
-window.SDK_INITIALIZED.then(initScript);
+window.SDK_INITIALIZED.then(WMEML_InitScript);

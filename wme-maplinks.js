@@ -88,12 +88,13 @@ const mapLinksRegistry = [
         handler: gotoWegstatus3
     }
 ];
-function initScript() {
+function WMEML_InitScript() {
+    console.log(`WME-MapLinks v${version} initializing...`);
     // initialize the sdk with your script id and script name
     if (!window.getWmeSdk) {
         throw new Error("SDK not available");
     }
-    W = window.getWmeSdk({ scriptId: "test", scriptName: "test" });
+    W = window.getWmeSdk({ scriptId: "WME-MapLinks", scriptName: "WME-MapLinks" });
     // Start using the SDK
     const mapCenter = W.Map.getMapCenter();
     const topCountry = W.DataModel.Countries.getTopCountry();
@@ -233,5 +234,5 @@ function gotoMatrixNL() {
     const url = `https://matrixnl.nl/index.php?center=${coords.y},${coords.x}&zoom=${zoom}`;
     window.open(url, '_blank');
 }
-window.SDK_INITIALIZED.then(initScript);
+window.SDK_INITIALIZED.then(WMEML_InitScript);
 })();
