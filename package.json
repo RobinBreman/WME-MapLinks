@@ -1,0 +1,14 @@
+{
+  "name": "wme-maplinks",
+  "version": "1.4.0",
+  "description": "Adds links to other maps in Waze Map Editor",
+  "scripts": {
+    "build": "tsc && node build.js"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.30",
+    "@types/proj4": "^2.5.5",
+    "typescript": "^5.3.3",
+    "wme-sdk-typings": "https://web-assets.waze.com/wme_sdk_docs/production/latest/wme-sdk-typings.tgz"
+  }
+}

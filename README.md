@@ -12,6 +12,7 @@ This script will add  buttons on top of WME allowing easy access to other source
 - Omgevingswet
 - SDP
 - Wegstatus
+- Wegstatus 3.0
 
 ## Code
 Feel free to improve this script I will be happy to accept any pull-requests.
@@ -20,6 +21,7 @@ https://github.com/RobinBreman/WME-MapLinks
 ## Changelog
 |Version||
 |---|---|
+1.4.0 | Added wegstatus 4.0, implemented faster WME load check, change coding language to typescript, started using the WME-SDK
 1.3.1 | Changed button order
 1.3.0 | Added Gmaps link and reworked source [thnx @nivong]
 1.2.2 | Release updated greasyfork version

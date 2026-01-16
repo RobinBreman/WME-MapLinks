@@ -15,12 +15,32 @@
 // @run-at       document-end      // After DOM loads (default)
 // ==/UserScript==
 
-(function () {
-    'use strict';
+import { WmeSDK } from 'wme-sdk-typings';
+import proj4 from 'proj4';
 
 const version = '1.4.0';
-let W;
-const mapLinksRegistry = [
+
+let W: WmeSDK;
+
+interface MapLink {
+    id: string;
+    icon: string;
+    title: string;
+    handler: () => void;
+}
+
+interface Settings {
+    enabledMaps: string[];
+    buttonPosition: string;
+}
+
+interface Coordinates {
+    x: number;
+    y: number;
+}
+
+
+const mapLinksRegistry: MapLink[] = [
     {
         id: 'BAG',
         icon: 'https://www.kadaster.nl/favicon.ico',
@@ -82,18 +102,23 @@ const mapLinksRegistry = [
         handler: gotoWegstatus3
     }
 ];
+
 function initScript() {
     // initialize the sdk with your script id and script name
     if (!window.getWmeSdk) {
         throw new Error("SDK not available");
     }
     W = window.getWmeSdk({ scriptId: "test", scriptName: "test" });
+
     // Start using the SDK
     const mapCenter = W.Map.getMapCenter();
     const topCountry = W.DataModel.Countries.getTopCountry();
+
     addMapLinks();
 }
-function addMapLinks() {
+
+
+function addMapLinks(): void {
     const buttonHTML = $(`
         <style>
             #WMEMapLinksButtons {
@@ -133,7 +158,9 @@ function addMapLinks() {
             <div id='WMEMapLinksButtons'></div>
         </div>
     `);
+
     $('.secondary-toolbar').prepend(buttonHTML);
+
     mapLinksRegistry.forEach(linkItem => {
         const btn = $(`
                 <button id='WMEMapLinksButton_${linkItem.id}' title='${linkItem.title}'>
@@ -144,82 +171,105 @@ function addMapLinks() {
         $('#WMEMapLinksButtons').append(btn);
     });
 }
-function getMapCoordinates() {
+
+function getMapCoordinates(): Coordinates {
     // const pl = $('.permalink')[0]?.href || '';
     // const latMatch = pl.match(/lat=([0-9]+\.[0-9]+)/);
     // const lonMatch = pl.match(/lon=([0-9]+\.[0-9]+)/);
+
+
     const mapCenter = W.Map.getMapCenter();
+
     return {
         y: mapCenter.lat, //latMatch ? parseFloat(latMatch[1]) : 0,
         x: mapCenter.lon //lonMatch ? parseFloat(lonMatch[1]) : 0
     };
+
+
+
 }
-function getMapZoomlevel() {
+
+function getMapZoomlevel(): number {
+
     const zoomLevel = W.Map.getZoomLevel();
+
     return zoomLevel;
     // const pl = $('.permalink')[0]?.href || '';
     // const zoomMatch = pl.match(/zoomLevel=([0-9]+)/);
     // return zoomMatch ? parseFloat(zoomMatch[1]) : 14;
 }
-function gotoMelvin() {
+
+function gotoMelvin(): void {
     const coords = getMapCoordinates();
     const url = `https://melvin.ndw.nu/public?sw=${coords.y},${coords.x}&ne=${coords.y},${coords.x}`;
     window.open(url, '_blank');
 }
-function gotoOmgevingswet() {
+
+function gotoOmgevingswet(): void {
     const coords = getMapCoordinates();
     const url = `https://omgevingswet.overheid.nl/regels-op-de-kaart/documenten?regelsandere=regels&locatie-stelsel=ETRS89&locatie-x=${coords.x}&locatie-y=${coords.y}`;
     window.open(url, '_blank');
 }
-function gotoBAGViewer() {
-    proj4.defs('EPSG:28992', '+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.2369,50.0087,465.658,0.406857330322398,0.350732676542563,-1.87034738360657,4.0812 +units=m +no_defs');
+
+function gotoBAGViewer(): void {
+    proj4.defs(
+        'EPSG:28992',
+        '+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.2369,50.0087,465.658,0.406857330322398,0.350732676542563,-1.87034738360657,4.0812 +units=m +no_defs'
+    );
     const coords = getMapCoordinates();
     const rdCoords = proj4('EPSG:4326', 'EPSG:28992', [coords.x, coords.y]);
     const url = `https://bagviewer.kadaster.nl/lvbag/bag-viewer/?theme=BRT+Achtergrond&geometry.x=${rdCoords[0]}&geometry.y=${rdCoords[1]}&zoomlevel=13.776830703977048`;
     window.open(url, '_blank');
 }
-function gotoMapillary() {
+
+function gotoMapillary(): void {
     const coords = getMapCoordinates();
     const zoom = getMapZoomlevel();
     const url = `https://www.mapillary.com/app/?lat=${coords.y}&lng=${coords.x}&z=${zoom}`;
     window.open(url, '_blank');
 }
-function gotoSDP() {
+
+function gotoSDP(): void {
     const coords = getMapCoordinates();
     const zoom = getMapZoomlevel();
     const url = `https://viewer.satellietdataportaal.nl/@${coords.y},${coords.x},${zoom}`;
     window.open(url, '_blank');
 }
-function gotoWegstatus() {
+
+function gotoWegstatus(): void {
     const coords = getMapCoordinates();
     const lat = coords.y.toString().replace('.', 'd');
     const lon = coords.x.toString().replace('.', 'd');
     const url = `https://www.wegstatus.nl/dashboardnl_old/lat=${lat}%7Clon=${lon}`;
     window.open(url, '_blank');
 }
-function gotoWegstatus3() {
+
+function gotoWegstatus3(): void {
     //https://dashboard.wegstatus.nl/dashboard/nederland?lat=52.874052&lng=5.746153&z=16
     const coords = getMapCoordinates();
     const zoom = getMapZoomlevel();
     const url = `https://dashboard.wegstatus.nl/dashboard/nederland?lat=${coords.y}&lng=${coords.x}&z=${zoom}`;
     window.open(url, '_blank');
 }
-function gotoGeorge() {
+
+function gotoGeorge(): void {
     const coords = getMapCoordinates();
     const url = `https://wegkenmerken.staging.ndw.nu/kaart?kaartlagen=ADMINISTRATIVE_DIVISION,SPEED_LIMIT,BRT,TRAFFIC_SIGN`;
     //UNDONE pl werkt niet &zichtbaar-gebied=${coords.x},${coords.y},${coords.x},${coords.y}`;
     window.open(url, '_blank');
 }
-function gotoNDW() {
+
+function gotoNDW(): void {
     const coords = getMapCoordinates();
     const url = `https://www.arcgis.com/apps/instant/interactivelegend/index.html?appid=d9382ea7bf574c4ba2d5a740469c504f&center=${coords.x},${coords.y}`;
     window.open(url, '_blank');
 }
-function gotoGoogleMaps() {
+
+function gotoGoogleMaps(): void {
     const coords = getMapCoordinates();
     const zoom = getMapZoomlevel();
     const url = `https://www.google.com/maps/@${coords.y},${coords.x},${zoom}z`;
     window.open(url, '_blank');
 }
+
 window.SDK_INITIALIZED.then(initScript);
-})();
