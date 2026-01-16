@@ -98,7 +98,7 @@ function WMEML_InitScript() {
     // Start using the SDK
     const mapCenter = W.Map.getMapCenter();
     const topCountry = W.DataModel.Countries.getTopCountry();
-    addMapLinks();
+    W.Events.once({ eventName: "wme-ready" }).then(() => { addMapLinks(); });
 }
 function addMapLinks() {
     const buttonHTML = $(`
