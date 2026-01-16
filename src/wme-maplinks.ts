@@ -123,7 +123,8 @@ function WMEML_InitScript() {
     const mapCenter = W.Map.getMapCenter();
     const topCountry = W.DataModel.Countries.getTopCountry();
 
-    addMapLinks();
+    W.Events.once({ eventName: "wme-ready" }).then(() => { addMapLinks(); });
+ 
 }
 
 
