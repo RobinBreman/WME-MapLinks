@@ -60,6 +60,12 @@ const mapLinksRegistry: MapLink[] = [
         handler: gotoGoogleMaps
     },
     {
+        id: 'MatrixNL',
+        icon: 'https://matrixnl.nl/favicon.ico',
+        title: 'MatrixNL',
+        handler: gotoMatrixNL
+    },
+    {
         id: 'Mapillary',
         icon: 'https://static.xx.fbcdn.net/rsrc.php/v3/yh/r/tMT3WIParw8.png',
         title: 'Mapillary',
@@ -271,5 +277,13 @@ function gotoGoogleMaps(): void {
     const url = `https://www.google.com/maps/@${coords.y},${coords.x},${zoom}z`;
     window.open(url, '_blank');
 }
+
+function gotoMatrixNL(): void {
+    const coords = getMapCoordinates();
+    const zoom = getMapZoomlevel();
+    const url = `https://matrixnl.nl/index.php?center=${coords.y},${coords.x}&zoom=${zoom}`;
+    window.open(url, '_blank');
+}
+
 
 window.SDK_INITIALIZED.then(initScript);
