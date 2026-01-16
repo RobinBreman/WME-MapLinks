@@ -6,6 +6,7 @@ This script will add  buttons on top of WME allowing easy access to other source
 
 - BAG
 - George
+- Matrixnl
 - Mapillary
 - Melvin
 - NDW
@@ -14,6 +15,8 @@ This script will add  buttons on top of WME allowing easy access to other source
 - Wegstatus
 - Wegstatus 3.0
 
+## Install
+Go to https://greasyfork.org/nl/scripts/504656-wme-maplinks to add this script to tampermonkey
 ## Code
 Feel free to improve this script I will be happy to accept any pull-requests.
 https://github.com/RobinBreman/WME-MapLinks
@@ -22,6 +25,7 @@ https://github.com/RobinBreman/WME-MapLinks
 |Version||
 |---|---|
 1.4.0 | Added wegstatus 4.0, implemented faster WME load check, change coding language to typescript, started using the WME-SDK
+1.3.2 | Added matrixnl.nl
 1.3.1 | Changed button order
 1.3.0 | Added Gmaps link and reworked source [thnx @nivong]
 1.2.2 | Release updated greasyfork version
