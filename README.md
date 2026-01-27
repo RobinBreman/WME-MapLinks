@@ -30,6 +30,7 @@ npm run build
 ## Changelog
 |Version||
 |---|---|
+1.4.1 | Fixed George link
 1.4.0 | Added wegstatus 4.0, implemented faster WME load check, change coding language to typescript, started using the WME-SDK
 1.3.2 | Added matrixnl.nl
 1.3.1 | Changed button order

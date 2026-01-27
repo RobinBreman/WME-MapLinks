@@ -32,12 +32,29 @@ const finalContent = `${header}
 
 ${jsContent.trim()}
 })();
+//# sourceMappingURL=wme-maplinks.js.map
 `;
 
 // Write the final file
 const outputFile = path.join(__dirname, 'wme-maplinks.js');
 fs.writeFileSync(outputFile, finalContent, 'utf8');
 console.log('✓ Generated wme-maplinks.js');
+
+// Copy source map if it exists
+const sourceMapFile = path.join(__dirname, 'dist', 'wme-maplinks.js.map');
+const sourceMapOutput = path.join(__dirname, 'wme-maplinks.js.map');
+if (fs.existsSync(sourceMapFile)) {
+    const sourceMap = JSON.parse(fs.readFileSync(sourceMapFile, 'utf8'));
+    // Update the source map to point to the correct source file location
+    sourceMap.sources = sourceMap.sources.map(source => {
+        if (source.startsWith('../src/')) {
+            return source.replace('../src/', 'src/');
+        }
+        return source;
+    });
+    fs.writeFileSync(sourceMapOutput, JSON.stringify(sourceMap, null, 2), 'utf8');
+    console.log('✓ Copied source map');
+}
 
 // Copy the meta.js file to root
 const metaSourceFile = path.join(__dirname, 'dist', 'wme-maplinks.meta.js');
