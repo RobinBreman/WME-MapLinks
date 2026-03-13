@@ -7,7 +7,7 @@
 // @exclude         *://*.waze.com/user/editor*
 // @grant 			none
 // @require         https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.js
-// @version 		1.4.1
+// @version 		1.4.2
 // @updateURL    https://github.com/RobinBreman/WME-MapLinks/raw/main/wme-maplinks.meta.js
 // @downloadURL  https://github.com/RobinBreman/WME-MapLinks/raw/main/wme-maplinks.js
 // @supportURL   https://github.com/RobinBreman/WME-MapLinks/issues
@@ -18,7 +18,7 @@
 import { WmeSDK } from 'wme-sdk-typings';
 import proj4 from 'proj4';
 
-const version = '1.4.1';
+const version = '1.4.2';
 
 let W: WmeSDK;
 
@@ -169,7 +169,7 @@ function addMapLinks(): void {
         </div>
     `);
 
-    $('.secondary-toolbar').prepend(buttonHTML);
+    $('div.secondary-toolbar').before(buttonHTML);
 
     mapLinksRegistry.forEach(linkItem => {
         const btn = $(`
@@ -183,30 +183,17 @@ function addMapLinks(): void {
 }
 
 function getMapCoordinates(): Coordinates {
-    // const pl = $('.permalink')[0]?.href || '';
-    // const latMatch = pl.match(/lat=([0-9]+\.[0-9]+)/);
-    // const lonMatch = pl.match(/lon=([0-9]+\.[0-9]+)/);
-
-
     const mapCenter = W.Map.getMapCenter();
 
     return {
         y: mapCenter.lat, //latMatch ? parseFloat(latMatch[1]) : 0,
         x: mapCenter.lon //lonMatch ? parseFloat(lonMatch[1]) : 0
     };
-
-
-
 }
 
 function getMapZoomlevel(): number {
-
     const zoomLevel = W.Map.getZoomLevel();
-
     return zoomLevel;
-    // const pl = $('.permalink')[0]?.href || '';
-    // const zoomMatch = pl.match(/zoomLevel=([0-9]+)/);
-    // return zoomMatch ? parseFloat(zoomMatch[1]) : 14;
 }
 
 function gotoMelvin(): void {
