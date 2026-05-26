@@ -7,7 +7,7 @@
 // @exclude         *://*.waze.com/user/editor*
 // @grant 			none
 // @require         https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.js
-// @version 		1.4.2
+// @version 		1.4.3
 // @updateURL    https://github.com/RobinBreman/WME-MapLinks/raw/main/wme-maplinks.meta.js
 // @downloadURL  https://github.com/RobinBreman/WME-MapLinks/raw/main/wme-maplinks.js
 // @supportURL   https://github.com/RobinBreman/WME-MapLinks/issues
@@ -202,7 +202,8 @@ function gotoWegstatus3() {
     //https://dashboard.wegstatus.nl/dashboard/nederland?lat=52.874052&lng=5.746153&z=16
     const coords = getMapCoordinates();
     const zoom = getMapZoomlevel();
-    const url = `https://dashboard.wegstatus.nl/dashboard/nederland?lat=${coords.y}&lng=${coords.x}&z=${zoom}`;
+    // const url = `https://dashboard.wegstatus.nl/dashboard/nederland?lat=${coords.y}&lng=${coords.x}&z=${zoom}`;
+    const url = `https://dashboard.roadstatus.eu/dashboard/nederland?lat=${coords.y}&lng=${coords.x}&z=${zoom}`;
     window.open(url, '_blank');
 }
 function gotoGeorge() {
